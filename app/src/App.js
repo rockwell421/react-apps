@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
+
 class App extends Component {
   state = {
     persons: [
@@ -61,6 +62,15 @@ class App extends Component {
 
   render() {
 
+    const style = {
+      fontSize: '16px',
+      backgroundColor: 'transparent',
+      border: '1px solid black',
+      padding: '0.5rem',
+      textAlign: 'center',
+      marginBottom: '2rem',
+    }
+
     //Displays/hides names
     let persons = null;
 
@@ -78,18 +88,33 @@ class App extends Component {
               })}
         </div>
       );
+      style.backgroundColor = 'black';
+      style.color = 'white';
+
+    }
+
+    //dynamically changing styles
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if(this.state.persons.length <= 1) {
+      classes.push('bold'); //classes=['red','bold'];
     }
 
 
     return (
-      <div className="App">
-        <h1> Hi, Im a React app </h1>
-        <button
-          className="Change-Button"
-          onClick={this.togglePersonsHandler}>Switch Name
-        </button>
-        {persons}
-      </div>
+        <div className="App">
+          <h1> Hi, Im a React app </h1>
+          <p className={classes.join(' ')}>Oh snap this works!</p>
+          <button
+            style={style}
+            className="Change-Button"
+            style={style}
+            onClick={this.togglePersonsHandler}>Switch Name
+          </button>
+          {persons}
+        </div>
     );
   }
 }
